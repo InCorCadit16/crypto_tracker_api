@@ -13,8 +13,7 @@ ENV PATH="/app/src:$PATH" \
 COPY pyproject.toml poetry.lock ./
 RUN poetry install --without dev --no-root && rm -rf $POETRY_CACHE_DIR
 
-COPY src ./src
-RUN poetry install --without dev
+WORKDIR /app/src
 
 EXPOSE 8000
 
