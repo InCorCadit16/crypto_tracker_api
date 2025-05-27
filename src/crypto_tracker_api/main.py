@@ -1,10 +1,7 @@
 from fastapi import FastAPI
 
+from crypto_tracker_api.routers import prices
+
 app = FastAPI()
 
-@app.get("/accounts")
-async def get_accounts():
-    return {
-        'accountsCount': 0,
-        'accounts': []
-    }
+app.include_router(prices.router, prefix='/prices', tags=['Prices'])
