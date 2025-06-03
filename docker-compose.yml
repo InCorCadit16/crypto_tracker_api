@@ -6,6 +6,36 @@ services:
       - "8000:8000"
     build:
       dockerfile: Dockerfile
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      AUTH_SECRET_KEY: ${AUTH_SECRET_KEY}
+      TOKEN_EXPIRATION_SECONDS: ${TOKEN_EXPIRATION_SECONDS}
     volumes:
       - "./src:/app/src"
-    command: poetry run python -m uvicorn crypto_tracker_api.main:app --reload --host="0.0.0.0" --port="8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: poetry run python -m uvicorn main:app --reload --host="0.0.0.0" --port="8000"
+
+  postgres:
+    image: postgres:17.5
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:

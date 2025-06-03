@@ -1,5 +1,5 @@
 import sys
-from crypto_tracker_api.utils.import_submodules import import_all_modules
+from utils.import_submodules import import_all_modules
 
 
 class ExchangeMeta(type):

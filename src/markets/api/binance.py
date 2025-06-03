@@ -1,4 +1,4 @@
-from crypto_tracker_api.services.exchanges.base import BaseExchangeApi, Exchanges
+from markets.api.base import BaseExchangeApi, Exchanges
 
 
 class BinanceApi(BaseExchangeApi):

@@ -3,7 +3,7 @@ from enum import Enum
 import httpx
 from typing import Any
 
-from crypto_tracker_api.services.exchanges import ExchangeMeta
+from markets.api import ExchangeMeta
 
 class Exchanges(Enum):
     BINANCE = 'binance'
@@ -33,7 +33,7 @@ class BaseExchangeApi(metaclass=ExchangeMeta):
         Raises:
             ValueError: If the price cannot be fetched
         """
-        raise NotImplemented
+        raise NotImplementedError
 
     async def get_price(self, left: str, right: str) -> float | None:
         """Get current price for given symbols pair"""

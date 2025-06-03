@@ -1,7 +1,7 @@
 import asyncio
-from crypto_tracker_api.schemas.markets import PriceResponse
-from crypto_tracker_api.services.exchanges import ExchangeMeta
-from crypto_tracker_api.services.exchanges.base import Exchanges
+from markets.schemas import PriceResponse
+from markets.api import ExchangeMeta
+from markets.api.base import Exchanges
 
 
 async def get_prices(left: str, right: str, include_exchanges: list[Exchanges] = None) -> PriceResponse:
